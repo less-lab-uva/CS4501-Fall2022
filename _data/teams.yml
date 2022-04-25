@@ -1,0 +1,27 @@
+- tier_name: Current Team
+  size: large
+  description: |-
+    
+  teams:
+    - name: Sebastian Elbaum
+      description: Instructor
+      email: selbaum at virginia
+      image: sebastian.png
+    - name: Meriel Stein
+      description: Teaching Assistant
+      email: meriel at virginia
+      image: meriel.jpeg
+    - name: Trey Woodlief
+      description: Teaching Assistant
+      email: adw8dm at virginia
+      image: trey.jpeg
+    - name: Carl Hildebrandt
+      description: Leads Labs
+      email: hildebrandt.carl at virginia
+      image: carl.png
+- tier_name: Previous Team
+  size: small
+  description: |- 
+
+  teams:
+    - name: Ana Nora Evans

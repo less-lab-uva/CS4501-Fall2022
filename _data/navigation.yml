@@ -1,0 +1,12 @@
+- name: Lectures
+  link: /#
+  dropdown:
+    - name: 1 - Coming Soon
+      link: /lectures/lecture1/ 
+- name: Labs
+  link: /#
+  dropdown:
+    - name: 1 - Coming Soon
+      link: /labs/lab1/
+- name: Project
+  link: /project/project/
