@@ -4,8 +4,12 @@ subtitle: CS 4501 - Fall 2022
 layout: page
 ---
 
+ 
 
-{% include notification.html message="This course is part of our ongoing effort to bridge the gap between **software engineering** and **robotics**. If you are a *student* and find value in the lectures and  in the labs please drop us an email so that we can get an idea of the impact this effort is having and how we can improve it. If you are a *faculty* member interested in teaching a course like this, reach out to us as we have  supplementary material and hard-earned experiences that might be helpful. Thank you!  - Sebastian Elbaum." 
+{% include notification.html message="CS 3100 (or DS2) is a requirement for this course, no exceptions." %}
+
+
+{% include notification.html message="This course is part of our ongoing effort to bridge the gap between **software engineering** and **robotics**.  If you are a *faculty* member interested in teaching a course like this, reach out to us as we have  supplementary material and hard-earned experiences that might be helpful. Thank you!  - Sebastian Elbaum." 
 status="is-success" 
 icon="fas fa-exclamation-triangle" %}
 
