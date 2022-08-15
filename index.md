@@ -45,17 +45,17 @@ Developing software for robot systems is challenging as they must sense, actuate
 |3     |---Labor Day---                         | Lab-2: ROS processes, Communication, and Simulation Environment       |
 |4     |Software Machinery + Q1                 | Lab-3: Types and Machines                                             |
 |5     |Robot and World Types                   | Lab-4: Sensor Types and Handling Uncertainty and Noise                |
-|5     |Abstractions for Perception  + Q2       | Lab-5: Perception through Image Analysis                              |
-|6     |---UVA Break Day---                     | Invited Speaker                                                       |
-|7     |Controlling your Robot                  | Lab-E: Robotics and Ethics                                            |
-|8     |Tradeoffs when Making Plans + Q3        | Lab-6: Controlling and Testing Tobots                                 |
-|9     |Localization and Navigation Stack       | Lab-7: Mapping and Motion Planning Software Stack                     |
-|10    |Overloading and Transformations         | Lab-8: Pose Transformations                                           |
-|11    |Advanced Robotics + Q4                  | Lab 9: Swarms and Safety                                              |
-|12    |Project parameters                      | Invited Speaker                                                       |
-|13    |Project check                           | Project consult                                                       |
-|14    |Project Presentations and Demos         | Project Presentations and Demos                                       |
-|15    |Taking stock                            | ---                                                                   |
+|6     |Abstractions for Perception  + Q2       | Lab-5: Perception through Image Analysis                              |
+|7     |---UVA Break Day---                     | Invited Speaker                                                       |
+|8     |Controlling your Robot                  | Lab-E: Robotics and Ethics                                            |
+|9     |Tradeoffs when Making Plans + Q3        | Lab-6: Controlling and Testing Tobots                                 |
+|10     |Localization and Navigation Stack       | Lab-7: Mapping and Motion Planning Software Stack                     |
+|11    |Overloading and Transformations         | Lab-8: Pose Transformations                                           |
+|12    |Advanced Robotics + Q4                  | Lab 9: Swarms and Safety                                              |
+|13    |Project parameters                      | Invited Speaker                                                       |
+|14    |Project check                           | Project consult                                                       |
+|15    |Project Presentations and Demos         | Project Presentations and Demos                                       |
+|16    |Taking stock                            | ---                                                                   |
  
 # Course Policies
 
