@@ -8,15 +8,19 @@
       email: selbaum at virginia
       image: sebastian.png
     - name: Meriel Stein
-      description: Teaching Assistant
+      description: Support Instructor
       email: meriel at virginia
       image: meriel.jpeg
     - name: Trey Woodlief
       description: Teaching Assistant
       email: adw8dm at virginia
       image: trey.jpeg
+    - name: Chris Morse
+      description: Teaching Assistant
+      email:  drb6yv  at virginia
+      image: chris.png
     - name: Carl Hildebrandt
-      description: Leads Labs
+      description: Support Instructor
       email: hildebrandt.carl at virginia
       image: carl.png
 - tier_name: Previous Team
