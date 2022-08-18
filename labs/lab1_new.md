@@ -70,7 +70,7 @@ If successful, the output should look like this:
 <div class="columns is-centered">
     <div class="column is-centered is-8">
         <figure class="image is-16by9">
-        <img src="../images/lab1/install1.png">
+        <img src="../images/lab1/docker_compose.png">
         </figure>
     </div>
 </div>
