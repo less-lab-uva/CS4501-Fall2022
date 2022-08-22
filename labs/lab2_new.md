@@ -31,7 +31,7 @@ At the end of this lab, you should understand:
 * How to create and use ROS communication channels (topics).
 * How to quickly reuse ROS nodes.
 * How to create and use launch files.
-* How to launch the simulator provided with the virtual machine.
+* How to launch the simulator provided with the Docker container.
 
 ---- 
 # Verify that Docker Has Started
