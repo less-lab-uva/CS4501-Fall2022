@@ -339,8 +339,7 @@ That's awesome! We just launched the rocketship using ROS code!
 
 You can stop execution of your code using the key-combination `CTRL-C` in each of the terminals.
 
-But let's dive a bit deeper so that we start to understand what is going on behind the scenes. To launch this rocket, we needed four terminals. 
-to launch the `roscore`, the rocket_engine, the main_controller software, and the countdown software. 
+But let's dive a bit deeper so that we start to understand what is going on behind the scenes. To launch this rocket, we needed four terminals to launch the `roscore`, the rocket_engine, the main_controller software, and the countdown software. 
 Using this information, we can start to understand some of the system organization as shown below: 
 
 <div class="columns is-centered">
