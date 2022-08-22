@@ -34,7 +34,7 @@ At the end of this lab, you should understand:
 * How to launch the simulator provided with the Docker container.
 
 ---- 
-# Verify that Docker Has Started
+# Start Docker
 As you recall from Lab1, it is first necessary to start Docker if it isn't already running. You can configure Docker Desktop to start when your computer starts for convenience. To verify that Docker is working correctly, open a terminal (Terminal 1) and run:
 
 ```
