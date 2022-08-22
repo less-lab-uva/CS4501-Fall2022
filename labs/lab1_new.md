@@ -6,7 +6,10 @@ layout: page
 
 # The Robotic Operating System
 
-In this class, we are going to be using the Robotic Operating System ([ROS](http://wiki.ros.org/ROS/Introduction)). ROS is a sophisticated and open source framework of software libraries, simulators, and development tools that help us to more quickly and effectively build robot systems. Why are we learning ROS? Well, ROS has become the de-facto standard for the robotics community and is one of the enablers of the current robotic revolution, so what we learn in this class (a small portion of ROS) will be valuable regardless of what direction your future takes you. Other reason to use ROS is that you will join an active community that constantly invents new robots (in the hundreds), provides new packages to cover the latest emerging algorithms and paradigms, and give us tons of documentation, answers, and support (thousands of contributors!). Take a look at the wide range of robots that use ROS below (or the [whole list](https://robots.ros.org)):
+In this class, we are going to be using the Robotic Operating System ([ROS](http://wiki.ros.org/ROS/Introduction)).
+ROS is a sophisticated and open source framework of software libraries, simulators, and development tools that help us to quickly and effectively build robot systems.
+Why are we learning ROS? Well, ROS has become the de-facto standard for the robotics community and is one of the enablers of the current robotic revolution, so what we learn in this class (a small portion of ROS) will be valuable regardless of what direction your future takes you.
+Another reason to use ROS is that you will join an active community that constantly invents new robots (in the hundreds), provides new packages to cover the latest emerging algorithms and paradigms, and give us tons of documentation, answers, and support (thousands of contributors!). Take a look at the wide range of robots that use ROS below (or the [whole list](https://robots.ros.org)):
 
 <div class="columns is-centered">
     <div class="column is-3">
@@ -37,9 +40,10 @@ In this class, we are going to be using the Robotic Operating System ([ROS](http
 ---- 
 
 # Learning Objectives
-This lab is structured into two sections. The first shows you how to set up the Docker container that we will be using for all labs in this course. This section aims to teach how to:
-* Install a Docker container that includes ROS.
-* Run basic ROS commands in the Docker container.
+This lab is structured into two sections. The first shows you how to set up the Docker container that we will be using for all labs in this course (more info about Docker below). This section aims to teach:
+* What Docker is and why we use it.
+* How to install a Docker container that includes ROS.
+* How to run basic ROS commands in the Docker container.
 
 The second part of the lab aims at teaching you the basics of building ROS-based systems and tooling. More specifically it aims to teach you how to:
 * Compile ROS code.
@@ -49,14 +53,67 @@ The second part of the lab aims at teaching you the basics of building ROS-based
 ---- 
 
 # Getting a Machine with ROS
-ROS is mainly developed on Linux-Ubuntu. Therefore, you first need to install a Docker container that will allow you to start developing in ROS. A *Docker container* is a package that contains all dependencies required to run an application. The set-up process is outlined below:
+## Why Docker
+ROS is mainly developed on the Linux-Ubuntu operating system, and to build the labs for this course you will need to have access to an Ubuntu environment. If you were to work day-to-day in ROS, you would likely have a whole desktop work machine that only runs Ubuntu (and several of the TAs do!), but you may be using another operating system like macOS or Windows and not have the ability to change your system operating system easily. 
+Docker allows us to solve this problem by creating an isolated Ubuntu environment that we can run *from inside another operating system*. 
+More specifically, Docker allows us to create [`images`](https://docs.docker.com/glossary/#image), a blueprint that tells Docker exactly how we need the Ubuntu system configured. This is especially useful in this case, because the teaching staff can guarantee that each student's environment is exactly the same; more generally, any time you need to make sure you have a repeatable, consistent environment, Docker can help. Docker then lets us use these images to build [`containers`](https://docs.docker.com/glossary/#container) that we can run, starting the Ubuntu system. 
+You can think of this as a small virtual machine running inside of your machine. For more information about Docker, refer to their documentation [here](https://docs.docker.com/get-started/), though we will explain the necessary commands you need for the labs as we go.
 
-## Docker Setup:
-Open a new terminal (Terminal 1) and enter the following commands:
+Thus, to get started you first need to install Docker and set up the provided Docker image that will allow you to start developing in ROS. The set-up process is outlined below:
+
+## Installing Docker:
+Docker itself is a program that bridges the gap between the container and your machine.
+We will start by installing Docker for your machine. See the below section corresponding to your machine's operating system.
+### Linux
+Follow the instructions [here](https://docs.docker.com/desktop/install/linux-install/).
+
+### Mac
+Follow the instructions [here](https://docs.docker.com/desktop/install/mac-install/). Note that if you are using one of the new M1 or M2 macs, you will need to select the appropriate option `Mac with Apple chip`.
+
+### Windows
+Follow the instructions [here](https://docs.docker.com/desktop/install/windows-install/).
+Windows has the `Windows Subsystem for Linux` which Docker can use to speed up and more easily run containers. We strongly recommend using WSL2 if your machine supports it (see requirements in the `WSL 2 backend` tab); otherwise, you will need to use the `Hyper-V backend`.
+
+## Verifying your Docker Installation
+Once you have Docker installed, you will need to ensure that it is started. You can configure Docker Desktop to start when your computer starts for convenience. However, if you do not want it to run all the time, you will need to remember to start it each time you want to run Docker.
+
+Once Docker has started, verify that it is working correctly by running this small Hello World demo. Open a terminal and run:
+
 ```bash
-$ cd ~
-$ git clone https://github.com/adwiii/cs4501-robotics-docker.git
-$ cd cs4501-robotics-docker
+docker run hello-world
+```
+
+You should see an output similar to this:
+
+```
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+
+## Setup the Lab Docker Image
+Open a new terminal (Terminal 1) and enter the following commands to download the Docker image instructions (the [`Dockerfile`](https://docs.docker.com/glossary/#dockerfile)):
+```bash
+cd ~  # You will need to access this repository every time we work on a lab, so choose a convenient place
+git clone https://github.com/less-lab-uva/cs4501-robotics-docker.git
+cd cs4501-robotics-docker
 ```
 
 Next, clone the class repository and build the container:
@@ -64,6 +121,8 @@ Next, clone the class repository and build the container:
 $ git clone https://github.com/less-lab-uva/CS4501-Labs.git
 $ docker-compose up --build
 ```
+
+The `docker-compose up --build` command looks in the [`docker-compose.yml`](https://github.com/less-lab-uva/cs4501-robotics-docker/blob/main/docker-compose.yml) file that specifies both how to build the image using the `Dockerfile` and how to run the image to get a working container. You should not need to edit this file. You will run the `docker-compose up --build` command each time you want to start the container to work on labs.
 
 If successful, the output should look like this:
 
@@ -75,19 +134,31 @@ If successful, the output should look like this:
     </div>
 </div>
 
-To access GUI applications, follow [this link](http://localhost:8080/vnc.html) and click "Connect".
+This terminal now shows the status of the Docker container and needs to stay open while you are using the container.
 
-Keep Terminal 1 running. Now, open a **new terminal** (Terminal 2) and enter the following commands to connect to your Docker container:
+## Using Visual Applications
+Once the Docker container is running, there is a full-fledged Ubuntu machine running in the background on your machine, but you cannot see a desktop.
+To access the desktop, follow [this link](http://localhost:8080/vnc.html) and click "Connect". This will create a desktop that you can see within your browser that starts a terminal by default.
+We have configured the container to use [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing), but instead of using the Internet to connect to a machine, this connects to your Ubuntu container directly.
+
+## Accessing a Terminal without using VNC
+You can also use `docker-compose` to access a terminal for the container directly from your host machine. Keep Terminal 1 running. Now, open a **new terminal** (Terminal 2) and enter the following commands to connect to your Docker container and open a terminal:
 ```bash
-$ cd ~/cs4501-robotics-docker
-$ docker-compose exec ros bash
+cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
+docker-compose exec ros bash
+```
+
+Note: if you are using [`Git BASH`](https://gitforwindows.org/) as your terminal on Windows, you will need to instead run: 
+
+```bash
+winpty docker-compose exec ros bash
 ```
 
 ## Test your Docker Container:
+To test that the Docker container and ROS are working properly, we will try to start ROS.
+ROS is a type of middle-ware. It isn't a full operating system, but similar to Docker how Docker helped your machine run Ubuntu, ROS helps facilitate how your ROS programs run and communicate. Just like we had to start Docker Desktop before we could run Docker containers, we need to start [`roscore`](http://wiki.ros.org/roscore) before we can run any ROS programs.
 
-<p> </p>
-
-To test that the Docker container and ROS are working properly, enter the following command into Terminal 2:
+To do this, enter the following command into Terminal 2:
 
 ```bash
 $ roscore
@@ -136,14 +207,15 @@ Let's assume we have been given the software used to fly a rocket to the moon. T
 </div>
 
 ## Downloading the Code
-
-To start the lab, we need to make sure the lab code is up to date. In your Docker container (Terminal 2), enter the following:
+Throughout the semester the teaching staff will be adding the labs to the [lab GitHub repository](https://github.com/less-lab-uva/CS4501-Labs) during the week the lab is assigned.
+Before each lab, you need to make sure the lab code is up to date. In your Docker container (Terminal 2), enter the following:
 
 ```bash
-# Change to labs directory
-$ cd ~/Desktop/CS4501-Labs
+# Change to labs directory. 
+# When you are working in the Docker container, the lab directory will always be ~/CS4501-Labs
+cd ~/CS4501-Labs
 # Pull the latest code
-$ git pull
+git pull
 ```
 
 ## Structuring and Building ROS Code
@@ -158,21 +230,23 @@ Let's now build the code in the workspace. In your Docker container (Terminal 2)
 
 ```bash
 # Change the directory to the ROS workspace
-$ cd ~/CS4501-Labs/lab1_ws/
-# Source and compile the ROS code
-$ source /opt/ros/melodic/setup.bash
-$ catkin build
+cd ~/CS4501-Labs/lab1_ws/
+# Source the ROS setup. This sets up your terminal environment to be ready to run ROS commands
+source /opt/ros/melodic/setup.bash
+# Build the code in this directory
+catkin build
 ```
 
 ```catkin``` is the name of ROS build system, the system that gathers source code and generates a target, similar to CMake but with extra support to handle the dependencies between heterogenous packages that usually coexist in robotic systems. Check [catkin design](http://wiki.ros.org/catkin/conceptual_overview) for more information.
 
-If you get no errors, you have successfully build your rocket's ROS code.  ** When you change your code and want to run it, you should build it first.**
+If you get no errors, you have successfully built your rocket's ROS code.  ** When you change your code and want to run it, you should build it first.** If you are in the same terminal, you can simply run `catkin build` again.
 
 Next, let's run our rocket software. 
 The rocket software consists of three software components. Let's start each component by opening  **three new terminals**, then enter the following:
 
 ### Terminal 2:
-We need to start the ROS core, a key piece of ROS infrastructure  which provides  rich standarized mechanisms for processes to communicate.
+We need to start the ROS core, a key piece of ROS infrastructure  which provides  rich standarized mechanisms for processes to communicate. There can only be one `roscore` running at a time, so if you still have it running from before, you can skip this.
+
 ```bash
 # Start ROS in the background
 $ roscore
@@ -336,7 +410,7 @@ Notice how these numbers match the numbers being printed by the rocketship softw
 Our rocketship code is reasonably simple, and keeping track of what is going on in our heads is manageable. 
 However, when you get to work on larger systems, it sometimes helps to **visualize the software modules and their communication** altogether. One way to do that is to use `rqt_graph`. `rqt_graph` provides a GUI plugin for visualizing the ROS computation graph made of topics and nodes. 
 
-While your rocketship is running, run the following command in a separate Docker container:
+While your rocketship is running, run the following command in a separate terminal:
 
 ```bash
 $ rqt
