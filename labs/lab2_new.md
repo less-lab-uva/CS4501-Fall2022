@@ -34,14 +34,67 @@ At the end of this lab, you should understand:
 * How to launch the simulator provided with the virtual machine.
 
 ---- 
+# Verify that Docker Has Started
+As you recall from Lab1, it is first necessary to start Docker if it isn't already running. You can configure Docker Desktop to start when your computer starts for convenience. To verify that Docker is working correctly, open a terminal (Terminal 1) and run:
+
+```
+docker run hello-world
+```
+
+You should see an output similar to this:
+
+```
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+
+# Building the Docker Container
+Next, navigate to the class repository and build the Docker container:
+
+```bash
+cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
+docker-compose up --build
+```
+
+This terminal now shows the status of the Docker container and needs to stay open while you are using the container.
+
+
+## Using Visual Applications
+Once the Docker container is running, there is a full-fledged Ubuntu machine running in the background on your machine, but you cannot see a desktop.
+To access the desktop, follow [this link](http://localhost:8080/vnc.html) and click "Connect". This will create a desktop that you can see within your browser that starts a terminal by default.
+We have configured the container to use [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing), but instead of using the Internet to connect to a machine, this connects to your Ubuntu container directly.
 
 # Improving the Rocketship
-Starting this lab, we are going to make improvements to our rocketship from Lab 1. First, let's get the Lab 2 workspace. Remember a ROS workspace is a folder where you modify, build, and install ROS code. This new workspace contains Lab 1's code with the modifications you should have made to Lab 1. To clone the new workspace, you can run the following in a terminal:
+Starting this lab, we are going to make improvements to our rocketship from Lab 1. First, let's get the Lab 2 workspace. Remember a ROS workspace is a folder where you modify, build, and install ROS code. This new workspace contains Lab 1's code with the modifications you should have made to Lab 1. First, ensure that Docker is running:
+
+
+To clone the new workspace, you can run the following in a new terminal (Terminal 2):
 ```bash
+cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
+# Connect to the Docker container
+docker-compose exec ros bash
 # Change to lab directory
-$ cd ~/Desktop/CS4501-Labs/
+cd ~/CS4501-Labs/
 # Clone the code
-$ git pull
+git pull
 ```
 
 Notice that you now have `lab2_ws`, which is were we will be doing this lab. This lab is divided into two parts, each with a separate workspace. We will begin in `lab2_p1_ws`. 
@@ -75,18 +128,18 @@ Skimming through the documentation, we pull out three important pieces of inform
 + This node will publish two topics: **keydown** and **keyup**
 
 Let's download this node and see if we can use it. Search the internet for "ROS keyboard node GitHub". Depending on your search engine, one of the first pages you will see is: [https://github.com/lrse/ros-keyboard](https://github.com/lrse/ros-keyboard). You will notice that there isn't much documentation on the Github page. That means we will need to spend some time figuring out how to use this code, but it looks simple enough to explore it further. 
-Let's get the ROS package with git and build our workspace. To do that run the following:
+Let's get the ROS package with git and build our workspace. To do that run the following in your Docker container (Terminal 2):
 
 
 ```bash
 # Go into the source folder of our workspace
-$ cd ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/src
+cd ~/CS4501-Labs/lab2_ws/lab2_p1_ws/src
 # Clone the keyboard package
-$ git clone https://github.com/lrse/ros-keyboard.git
+git clone https://github.com/lrse/ros-keyboard.git
 # Go back to the main directory
-$ cd ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/
+cd ~/CS4501-Labs/lab2_ws/lab2_p1_ws/
 # Build the catkin workspace
-$ catkin build
+catkin build
 ```
 
 {% include notification.html message="Extra tip: When including other git repositories in your own, consider using `git submodule` [(docs)](https://git-scm.com/book/en/v2/Git-Tools-Submodules) or `git subtree` [(docs)](https://www.atlassian.com/git/tutorials/git-subtree). These help you keep the other repositories you include up-to-date and separate from your code. Since we will not be maintaining this code long-term, we do not need to do this for the lab and will use the simpler `git clone`." 
@@ -99,33 +152,49 @@ Next, let's figure out how this node works. In absence of documentation, figurin
 2. Listing the available topics
 3. Publishing, or echoing topics specific to that node.
 
-In our case, we know from the documentation that the node should publish messages on either `/keydown` or `/keyup`, and so we know we need to echo those topics. Open three terminals and run the following commands:
-
-### Terminal 1
-```bash
-$ roscore
-```
+In our case, we know from the documentation that the node should publish messages on either `/keydown` or `/keyup`, and so we know we need to echo those topics. Open two new terminals and run the following commands:
 
 ### Terminal 2
 ```bash
-$ source ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/devel/setup.bash 
-$ rosrun keyboard keyboard
+# Start ROS in the background. There can only be one `roscore` running at a time, so if you still have it running, skip this step.
+roscore
 ```
-
-**Note:** After running this command you should see a small, blank GUI appear.
 
 ### Terminal 3
 ```bash
-$ source ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/devel/setup.bash 
-$ rostopic echo /keyboard/keydown
+cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
+# Connect to the Docker container
+docker-compose exec ros bash
+# Source the ROS setup. This sets up your terminal environment to be ready to run ROS commands
+source ~/CS4501-Labs/lab2_ws/lab2_p1_ws/devel/setup.bash 
+# Run the keyboard source code
+rosrun keyboard keyboard
 ```
 
-Click on the small GUI window that popped up and press a key on the keyboard (*for instance, press the key `a`*). In terminal 3, you should see the following:
+**Note:** You will be presented with a blank window in your VNC browser (if not open, click [here](http://localhost:8080/vnc.html) and connect).
+
+### Terminal 4
 ```bash
->>> ...
->>> code: 97
->>> modifiers: 0
->>> ---
+cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
+# Connect to the Docker container
+docker-compose exec ros bash
+# Source the ROS setup. This sets up your terminal environment to be ready to run ROS commands
+source ~/CS4501-Labs/lab2_ws/lab2_p1_ws/devel/setup.bash 
+# Retrieve information from `/keyboard/keydown` topic
+rostopic echo /keyboard/keydown
+```
+
+Click on the small GUI window that popped up and press a key on the keyboard (*for instance, press the spacebar*). In terminal 4, you should see the following:
+```bash
+header: 
+  seq: 0
+  stamp: 
+    secs: 1661189918
+    nsecs: 324658428
+  frame_id: ''
+code: 32
+modifiers: 0
+---
 ```
 
 What did we just do? Well, we clicked a key on our keyboard, the ROS node keyboard registered that keypress, and it published a ROS message on the topic `/keyboard/keydown`. Try pressing other keys and looking at what the published ROS messages are. Below is our computation graph. We can see that the keyboard node is publishing both `/keyboard/keydown` and `/keyboard/keyup` topics, and we are echoing one of those topics to standard output.
@@ -142,15 +211,15 @@ What did we just do? Well, we clicked a key on our keyboard, the ROS node keyboa
 
 # Creating a Keyboard Manager
 
-Now that we have figured out how the keyboard node works, close it so we can develop a keyboard manager. **Close all terminals we just opened** Note: closing the keyboard nodes GUI wont kill its process, and thus the GUI will just reappear. You thus have to close the terminal running it.
+Now that we have figured out how the keyboard node works, close it so we can develop a keyboard manager. **Close terminals 2, 3, and 4.** Note: closing the GUI for they keyboard nodes wont kill its process, and thus the GUI will just reappear. To terminate the process, you can close the terminal running it.
 
-The keyboard manager's job will be to take the information provided by the keyboard node, interpret it, and then publish appropriate control messages to the rocket (for instance, `/launch_abort`). In our case, we want to check if the "**a**" key was pressed and then send an abort message. Start by creating the node:
+The keyboard manager's job will be to take the information provided by the keyboard node, interpret it, and then publish appropriate control messages to the rocket (for instance, `/launch_abort`). In our case, we want to check if the "**a**" key was pressed and then send an abort message. Start by opening a new terminal (Terminal 2) and creating the node:
 
 ```bash
 # Create the keyboard-to-abort manager node
-$ touch ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/src/rocketship/src/keyboard_manager.py
+touch ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/src/rocketship/src/keyboard_manager.py
 # Give the keyboard-to-abort manager node execution privileges
-$ chmod u+x ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/src/rocketship/src/keyboard_manager.py
+chmod u+x ~/Desktop/CS4501-Labs/lab2_ws/lab2_p1_ws/src/rocketship/src/keyboard_manager.py
 ```
 
 Next, we are going to open the node we just created so that we can edit the content. You can open the file in any text editor of your choice. The provided virtual machine has Visual Studio Code installed. To open the file in Visual Studio Code, you can either type this in the terminal or click the blue icon in the menu bar.
