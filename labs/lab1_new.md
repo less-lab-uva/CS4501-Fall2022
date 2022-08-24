@@ -148,7 +148,7 @@ This is now running in the background on your computer managed by Docker. You ca
 
 <div class="columns is-centered">
     <div class="column is-centered is-8">
-        <figure class="image is-16by9">
+        <figure class="image">
         <img src="../images/lab1/docker_desktop.png">
         </figure>
     </div>
@@ -213,7 +213,7 @@ The terminal should output something similar to what you see in the picture belo
 
 
 ---- 
-# Checkpoint 1
+# Checkpoint 1 [Self-Check]
 
 For this checkpoint, you should be able to do the following:
 1. Launch the Docker container
@@ -647,7 +647,7 @@ Rerun the abort test before the rocket takes off. **Take a screenshot of the ter
 
 At the end of this lab, you should have the following:
 
-1. Have installed Docker and the necessary container
+1. [Self-Check] Have installed Docker and the necessary container
     1. Launch the Docker container
     2. Run `roscore` in the terminal
 2. A screenshot of the ROS communication graph. Use this graph to answer:
