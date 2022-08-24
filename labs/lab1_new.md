@@ -245,7 +245,7 @@ Let's assume we have been given the software used to fly a rocket to the moon. T
 
 ## Downloading the Code
 Throughout the semester the teaching staff will be adding the labs to the [lab GitHub repository](https://github.com/less-lab-uva/CS4501-Labs) during the week the lab is assigned.
-Before each lab, you need to make sure the lab code is up to date. In your Docker container (Terminal 1), enter the following:
+Before each lab, you need to make sure the lab code is up to date. In your Docker container (Terminal 1), close roscore with CTRL-C (if it's still open). Then enter the following:
 
 ```bash
 # Change to labs directory. 
