@@ -481,7 +481,7 @@ The initial desktop will look like the figure below. Note that the desktop is ve
     </div>
 </div>
 
-{% include notification.html message="Additional word of caution. This desktop mananger has ["Workspaces"](https://wiki.archlinux.org/title/fluxbox#Workspaces), a way of grouping different sets of windows together. Note that when you first open the browser it says "Workspace 1" in the lower left corner. *If you scroll the mouse wheel while over the desktop, it will scroll through the workspaces*. Any windows you have open will no longer be visible, as they are on the other workspace. If you find yourself missing a window you expect to be visible, check the taskbar and examine which workspace you are viewing." %}
+{% include notification.html message="Additional word of caution. This desktop manager has [Workspaces](https://wiki.archlinux.org/title/fluxbox#Workspaces), a way of grouping different sets of windows together. Note that when you first open the browser it says `Workspace 1` in the lower left corner. *If you scroll the mouse wheel while over the desktop, it will scroll through the workspaces*. Any windows you have open will no longer be visible, as they are on the other workspace. If you find yourself missing a window you expect to be visible, check the taskbar and examine which workspace you are viewing." %}
 
 
 
