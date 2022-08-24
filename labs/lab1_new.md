@@ -55,7 +55,7 @@ The second part of the lab aims at teaching you the basics of building ROS-based
 # Getting a Machine with ROS
 ## Why Docker
 ROS is mainly developed on the Linux-Ubuntu operating system, and to build the labs for this course you will need to have access to an Ubuntu environment. If you were to work day-to-day in ROS, you would likely have a whole desktop work machine that only runs Ubuntu (and several of the TAs do!), but you may be using another operating system like macOS or Windows and not have the ability to change your system operating system easily. 
-Docker allows us to solve this problem by creating an isolated Ubuntu environment that we can run *from inside another operating system*. 
+Docker allows us to solve this problem by creating an isolated Ubuntu environment that we can run *from inside another operating system*. Although we will use Docker to create and configure an Ubuntu environment, Docker can be used for many different operating systems and configurations.  
 More specifically, Docker allows us to create [`images`](https://docs.docker.com/glossary/#image), a blueprint that tells Docker exactly how we need the Ubuntu system configured. This is especially useful in this case, because the teaching staff can guarantee that each student's environment is exactly the same; more generally, any time you need to make sure you have a repeatable, consistent environment, Docker can help. Docker then lets us use these images to build [`containers`](https://docs.docker.com/glossary/#container) that we can run, starting the Ubuntu system. 
 You can think of this as a small virtual machine running inside of your machine. For more information about Docker, refer to their documentation [here](https://docs.docker.com/get-started/), though we will explain the necessary commands you need for the labs as we go.
 
@@ -113,67 +113,82 @@ Open a new terminal (Terminal 1) and enter the following commands to download th
 ```bash
 cd ~  # You will need to access this repository every time we work on a lab, so choose a convenient place
 git clone https://github.com/less-lab-uva/cs4501-robotics-docker.git
-cd cs4501-robotics-docker
 ```
 
 Next, clone the class repository and build the container:
 ```bash
+cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
 git clone https://github.com/less-lab-uva/CS4501-Labs.git
-docker-compose up --build
+docker-compose up --build -d
 ```
 
-The `docker-compose up --build` command looks in the [`docker-compose.yml`](https://github.com/less-lab-uva/cs4501-robotics-docker/blob/main/docker-compose.yml) file that specifies both how to build the image using the `Dockerfile` and how to run the image to get a working container.
-You will generally not need to edit this file, other than the note in the next section. 
-You will run the `docker-compose up --build` command each time you want to start the container to work on labs.
+The `docker-compose up --build -d` command looks in the [`docker-compose.yml`](https://github.com/less-lab-uva/cs4501-robotics-docker/blob/main/docker-compose.yml)
+file that specifies both how to build the image using the `Dockerfile` and how to run the image to get a working container.
+You will generally not need to edit this file, other than the one time specified later in this lab. 
+You will run the `docker-compose up --build -d` command each time you want to start the container to work on labs.
+
+{% include notification.html message="The first time you run this command, it will take a long time to complete, possibly 15-20 minutes or more. Future runs will be much shorter." 
+status="is-success" 
+icon="fas fa-exclamation-triangle" %}
+
+During this initial set up, Docker is building the container from the image we provided in the Docker file.
+While doing so, it caches the result at each step so that even if you were to edit part of the Dockerfile later, it would not redo parts that had not changed.
+We will not need to edit the Docker file during the semester, so after the first run, every other run should take only a few seconds to start.
 
 If successful, the output should look like this:
-
-<div class="columns is-centered">
-    <div class="column is-centered is-8">
-        <figure class="image is-16by9">
-        <img src="../images/lab1/docker_compose.png">
-        </figure>
-    </div>
-</div>
-
-This terminal now shows the status of the Docker container and needs to stay open while you are using the container.
-
-## Using Visual Applications
-Once the Docker container is running, there is a full-fledged Ubuntu machine running in the background on your machine, but you cannot see a desktop.
-To access the desktop, follow [this link](http://localhost:8080/vnc.html) and click "Connect". This will create a desktop that you can see within your browser that starts a terminal by default.
-We have configured the container to use [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing), but instead of using the Internet to connect to a machine, this connects to your Ubuntu container directly.
-
-The initial desktop will look like the figure below. Note that the desktop is very small; we have set the desktop size to 800 by 600 in the [`docker-compose.yml`](https://github.com/less-lab-uva/cs4501-robotics-docker/blob/main/docker-compose.yml) file. If we set it to something like 1920 by 1080, a common screen resolution, the Ubuntu desktop would have scroll bars because inside the browser is not the full available space of your screen. You can adjust your local `docker-compose.yml` to a resolution that works for you. Adjust the following as needed, on my 1920 by 1080 display, I found that 1920 by 900 worked well, but this varies by monitor and window size. Be cognizant that if you have scroll bars, you may not be able to see all of a window, and you may need to scroll to see the taskbar at the bottom.
-
-```yml
-  novnc:  
-    image: theasp/novnc:latest
-    environment:
-      - DISPLAY_WIDTH=800  #EDIT 
-      - DISPLAY_HEIGHT=600 #EDIT 
+```
+...
+Creating cs4501-robotics-docker_ros_1 ...
+Creating cs4501-robotics-docker_novnc_1 ...
+Creating cs4501-robotics-docker_ros_1   ... done
+Creating cs4501-robotics-docker_novnc_1 ... done
 ```
 
+This is now running in the background on your computer managed by Docker. You can view the status in Docker Desktop, where it should look like:
 
 <div class="columns is-centered">
     <div class="column is-centered is-8">
         <figure class="image is-16by9">
-        <img src="../images/lab1/vnc_initial.png">
+        <img src="../images/lab1/docker_desktop.png">
         </figure>
     </div>
 </div>
 
+It is safe to run this command multiple times - running `docker-compose up --build -d` while the container is already
+running will output the following and not affect the running container.
+```
+cs4501-robotics-docker_ros_1 is up-to-date
+cs4501-robotics-docker_novnc_1 is up-to-date
+```
 
-## Accessing a Terminal without using VNC
+{% include notification.html message="Fun fact, this docker environment was adapted from work done by a previous student who took this class! If you find, develop, or discover something interesting we would love to know!" 
+status="is-success" 
+icon="fas fa-exclamation-triangle" %}
+
+### Stopping the Docker container
+Once you run the above `docker-compose up --build -d` command, the Docker container will be running in the background
+and we will explore later how to interact with the container. However, if you need to stop the container for any reason
+you can do so through Docker Desktop or run:
+
+```bash
+cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
+docker-compose stop
+```
+
+Which will stop the containers and display:
+
+```
+Stopping cs4501-robotics-docker_ros_1   ...
+Stopping cs4501-robotics-docker_novnc_1 ...
+Stopping cs4501-robotics-docker_novnc_1 ... done
+Stopping cs4501-robotics-docker_ros_1   ... done
+```
+
+## Accessing a Terminal
 You can also use `docker-compose` to access a terminal for the container directly from your host machine. Keep Terminal 1 running. Now, open a **new terminal** (Terminal 2) and enter the following commands to connect to your Docker container and open a terminal:
 ```bash
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
 docker-compose exec ros bash
-```
-
-Note: if you are using [`Git BASH`](https://gitforwindows.org/) as your terminal on Windows, you will need to instead run: 
-
-```bash
-winpty docker-compose exec ros bash
 ```
 
 ## Test your Docker Container:
@@ -248,20 +263,18 @@ Workspaces are one way to address the complexity in the development of large sys
 by providing a standard structure where developers and tools know where things are located.
 ROS even has community [conventions](https://www.ros.org/reps/rep-0128.html) on such structures.
 
-Let's now build the code in the workspace. In your Docker container (Terminal 2), run the following command:
+Let's now build the code in the workspace. In your Docker container (Terminal 2), first stop the `roscore` command, then run the following command:
 
 ```bash
 # Change the directory to the ROS workspace
 cd ~/CS4501-Labs/lab1_ws/
-# Source the ROS setup. This sets up your terminal environment to be ready to run ROS commands
-source /opt/ros/melodic/setup.bash
 # Build the code in this directory
 catkin build
 ```
 
 ```catkin``` is the name of ROS build system, the system that gathers source code and generates a target, similar to CMake but with extra support to handle the dependencies between heterogenous packages that usually coexist in robotic systems. Check [catkin design](http://wiki.ros.org/catkin/conceptual_overview) for more information.
 
-If you get no errors, you have successfully built your rocket's ROS code.  ** When you change your code and want to run it, you should build it first.** If you are in the same terminal, you can simply run `catkin build` again.
+If you get no errors, you have successfully built your rocket's ROS code.  **When you change your code and want to run it, you should build it first.** If you are in the same terminal, you can simply run `catkin build` again.
 
 Next, let's run our rocket software. 
 The rocket software consists of three software components. Let's start each component by opening  **three new terminals**, then enter the following:
@@ -280,8 +293,10 @@ roscore
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
 # Connect to the Docker container
 docker-compose exec ros bash
+# cd into the directory for the lab
+cd ~/CS4501-Labs/lab1_ws
 # Update your environment variables so that ROS knows where your workspace is
-source ~/CS4501-Labs/lab1_ws/devel/setup.bash
+source devel/setup.bash
 # Run the rocket-ship source code
 rosrun rocketship rocket_engine.py
 ```
@@ -294,8 +309,10 @@ The `rocket_engine` software  controlling the power to the rocket engine is now 
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
 # Connect to the Docker container
 docker-compose exec ros bash
+# cd into the directory for the lab
+cd ~/CS4501-Labs/lab1_ws
 # Update your environment variables so that ROS knows where your workspace is
-source ~/CS4501-Labs/lab1_ws/devel/setup.bash
+source devel/setup.bash
 # Run the rocket-ship source code
 rosrun rocketship main_controller
 ```
@@ -314,8 +331,10 @@ Now let's get ready to launch the rocket! Start the countdown using terminal 5.
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
 # Connect to the Docker container
 docker-compose exec ros bash
+# cd into the directory for the lab
+cd ~/CS4501-Labs/lab1_ws
 # Update your environment variables so that ROS knows where your workspace is
-source ~/CS4501-Labs/lab1_ws/devel/setup.bash
+source devel/setup.bash
 # Run the rocket-ship source code
 rosrun rocketship countdown
 ```
@@ -380,8 +399,10 @@ Take a second to explore what is inside the launch file. By using a launch file,
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
 # Connect to the Docker container
 docker-compose exec ros bash
+# cd into the directory for the lab
+cd ~/CS4501-Labs/lab1_ws
 # Update your environment variables so that ROS knows where your workspace is
-source ~/CS4501-Labs/lab1_ws/devel/setup.bash
+source devel/setup.bash
 # Run the countdown code
 roslaunch rocketship rocket.launch
 ```
@@ -433,6 +454,37 @@ Notice how these numbers match the numbers being printed by the rocketship softw
 ```
 
 To stop the stream of messages, press `CTRL-C` in the terminal.
+
+## Using Visual Applications
+While the Docker container is running, there is a full-fledged Ubuntu machine running in the background on your machine that so far we have only accessed from the terminal.
+To access the desktop, follow this link [http://localhost:8080/vnc.html](http://localhost:8080/vnc.html) and click "Connect". 
+This will connect you to a very simple Ubuntu desktop interface.
+We have configured the container to use [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing), but instead of using the Internet to connect to a machine, this connects to your Ubuntu container directly. 
+Any actions you perform in the terminal that open a window will do so in this browser window.
+
+The initial desktop will look like the figure below. Note that the desktop is very small; we have set the desktop size to 800 by 600 in the [`docker-compose.yml`](https://github.com/less-lab-uva/cs4501-robotics-docker/blob/main/docker-compose.yml) file. If we set it to something like 1920 by 1080, a common screen resolution, the Ubuntu desktop would have scroll bars because inside the browser is not the full available space of your screen. You can adjust your local `docker-compose.yml` to a resolution that works for you. Adjust the following as needed; on my 1920 by 1080 display, I found that 1920 by 900 worked well, but this varies by monitor and window size. Be cognizant that if you have scroll bars, you may not be able to see all of a window, and you may need to scroll to see the taskbar at the bottom.
+
+```yml
+  novnc:  
+    image: theasp/novnc:latest
+    environment:
+      - DISPLAY_WIDTH=800  #EDIT 
+      - DISPLAY_HEIGHT=600 #EDIT 
+```
+
+
+<div class="columns is-centered">
+    <div class="column is-centered is-8">
+        <figure class="image is-16by9">
+        <img src="../images/lab1/vnc_initial.png">
+        </figure>
+    </div>
+</div>
+
+{% include notification.html message="Additional word of caution. This desktop mananger has ["Workspaces"](https://wiki.archlinux.org/title/fluxbox#Workspaces), a way of grouping different sets of windows together. Note that when you first open the browser it says "Workspace 1" in the lower left corner. *If you scroll the mouse wheel while over the desktop, it will scroll through the workspaces*. Any windows you have open will no longer be visible, as they are on the other workspace. If you find yourself missing a window you expect to be visible, check the taskbar and examine which workspace you are viewing." %}
+
+
+
 ## RQT Graph
 
 Our rocketship code is reasonably simple, and keeping track of what is going on in our heads is manageable. 
