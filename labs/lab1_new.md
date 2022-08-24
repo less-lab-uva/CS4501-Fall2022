@@ -109,7 +109,7 @@ For more examples and ideas, visit:
 ```
 
 ## Setup the Lab Docker Image
-Open a new terminal (Terminal 1) and enter the following commands to download the Docker image instructions (the [`Dockerfile`](https://docs.docker.com/glossary/#dockerfile)):
+Open a new terminal on your host machine and enter the following commands to download the Docker image instructions (the [`Dockerfile`](https://docs.docker.com/glossary/#dockerfile)):
 ```bash
 cd ~  # You will need to access this repository every time we work on a lab, so choose a convenient place
 git clone https://github.com/less-lab-uva/cs4501-robotics-docker.git
@@ -185,7 +185,7 @@ Stopping cs4501-robotics-docker_ros_1   ... done
 ```
 
 ## Accessing a Terminal
-You can also use `docker-compose` to access a terminal for the container directly from your host machine. Keep Terminal 1 running. Now, open a **new terminal** (Terminal 2) and enter the following commands to connect to your Docker container and open a terminal:
+You can also use `docker-compose` to access a terminal for the container directly from your host machine. In a terminal on your host machine (Terminal 1) enter the following commands to connect to your Docker container and open a terminal:
 ```bash
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
 docker-compose exec ros bash
@@ -195,7 +195,7 @@ docker-compose exec ros bash
 To test that the Docker container and ROS are working properly, we will try to start ROS.
 ROS is a type of middle-ware. It isn't a full operating system, but similar to Docker how Docker helped your machine run Ubuntu, ROS helps facilitate how your ROS programs run and communicate. Just like we had to start Docker Desktop before we could run Docker containers, we need to start [`roscore`](http://wiki.ros.org/roscore) before we can run any ROS programs.
 
-To do this, enter the following command into Terminal 2:
+To do this, enter the following command into Terminal 1:
 
 ```bash
 roscore
@@ -245,7 +245,7 @@ Let's assume we have been given the software used to fly a rocket to the moon. T
 
 ## Downloading the Code
 Throughout the semester the teaching staff will be adding the labs to the [lab GitHub repository](https://github.com/less-lab-uva/CS4501-Labs) during the week the lab is assigned.
-Before each lab, you need to make sure the lab code is up to date. In your Docker container (Terminal 2), enter the following:
+Before each lab, you need to make sure the lab code is up to date. In your Docker container (Terminal 1), enter the following:
 
 ```bash
 # Change to labs directory. 
@@ -263,7 +263,7 @@ Workspaces are one way to address the complexity in the development of large sys
 by providing a standard structure where developers and tools know where things are located.
 ROS even has community [conventions](https://www.ros.org/reps/rep-0128.html) on such structures.
 
-Let's now build the code in the workspace. In your Docker container (Terminal 2), first stop the `roscore` command, then run the following command:
+Let's now build the code in the workspace. In your Docker container (Terminal 1), first stop the `roscore` command, then run the following command:
 
 ```bash
 # Change the directory to the ROS workspace
@@ -279,7 +279,7 @@ If you get no errors, you have successfully built your rocket's ROS code.  **Whe
 Next, let's run our rocket software. 
 The rocket software consists of three software components. Let's start each component by opening  **three new terminals**, then enter the following:
 
-### Terminal 2:
+### Terminal 1:
 We need to start the ROS core, a key piece of ROS infrastructure  which provides  rich standarized mechanisms for processes to communicate. There can only be one `roscore` running at a time, so if you still have it running from before, you can skip this.
 
 ```bash
@@ -287,7 +287,7 @@ We need to start the ROS core, a key piece of ROS infrastructure  which provides
 roscore
 ```
 
-### Terminal 3:
+### Terminal 2:
 
 ```bash
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
@@ -303,7 +303,7 @@ rosrun rocketship rocket_engine.py
 
 The `rocket_engine` software  controlling the power to the rocket engine is now running.  You will see no further messages printed in this terminal. 
 
-### Terminal 4:
+### Terminal 3:
 
 ```bash
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
@@ -323,9 +323,9 @@ The `main_controller` which commands the `rocket_engine` to go at certain veloci
 >>> [ INFO] [...]: Rocket Ready for Countdown
 ```
 
-Now let's get ready to launch the rocket! Start the countdown using terminal 5.
+Now let's get ready to launch the rocket! Start the countdown using Terminal 4.
 
-### Terminal 5:
+### Terminal 4:
 
 ```bash
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
@@ -343,7 +343,7 @@ The `countdown` component gives the command to the `main_controller` to initiate
 
 
 
-If everything went correctly in **terminal 4**, you should see a countdown (after 5 seconds) and subsequent velocity commands as shown below:
+If everything went correctly in **Terminal 3**, you should see a countdown (after 5 seconds) and subsequent velocity commands as shown below:
 
 ```bash
 >>> [ INFO] [...]: Countdown: 10s
@@ -393,7 +393,7 @@ Let's add each of the different software components into the launch file. ROS ca
 <node pkg="rocketship" type="countdown" name="CountDownNode"></node>
 ```
 
-Take a second to explore what is inside the launch file. By using a launch file, ROS knows to start `roscore` automatically and how to start three software modules (nodes) `rocket_engine`, `main_controller`, and `countdown`. Each of the nodes belongs to the rocketship package (pkg). We want the `main_controller` to output to screen (the terminal). Save the file and go back to your terminal. Let's launch the rocket. Close all terminals (except for Terminal 1) and open a new one. To launch the rocket we need to run:
+Take a second to explore what is inside the launch file. By using a launch file, ROS knows to start `roscore` automatically and how to start three software modules (nodes) `rocket_engine`, `main_controller`, and `countdown`. Each of the nodes belongs to the rocketship package (pkg). We want the `main_controller` to output to screen (the terminal). Save the file and go back to your terminal. Let's launch the rocket. Close all terminals and open a new one. To launch the rocket we need to run:
 
 ```bash
 cd ~/cs4501-robotics-docker  # edit the location if you did not clone the repository to ~ during Docker Setup
