@@ -5,4 +5,10 @@ layout: page
 
 ---
 
-Look back later to find out what the final project is.
+## Lecture Slides: [download](../intro_slides.pdf)
+
+<figure class="image is-16by9">
+    <iframe class="has-ratio" frameborder="0" scrolling="yes" width="640" height="360"
+        src="../intro_slides.pdf">
+    </iframe>
+</figure>
