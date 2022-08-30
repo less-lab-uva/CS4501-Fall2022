@@ -1,6 +1,6 @@
 ---
 title: Lecture 1
-subtitle: In Progress
+subtitle: Posted 8/25 
 layout: page
 
 ---
