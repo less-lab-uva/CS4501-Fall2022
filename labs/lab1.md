@@ -263,7 +263,7 @@ Workspaces are one way to address the complexity in the development of large sys
 by providing a standard structure where developers and tools know where things are located.
 ROS even has community [conventions](https://www.ros.org/reps/rep-0128.html) on such structures.
 
-Let's now build the code in the workspace. In your Docker container (Terminal 1), first stop the `roscore` command, then run the following command:
+Let's now build the code in the workspace. First, stop `roscore` in Terminal 1 if it is still running (CTRL-C), but ***do not exit the Docker terminal***. Now, in Terminal 1, run the following command:
 
 ```bash
 # Change the directory to the ROS workspace
