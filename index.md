@@ -63,7 +63,8 @@ Developing software for robot systems is challenging as they must sense, actuate
  
 # Course Policies
 
-* Students must fully comply with all the provisions of the University’s Honor Code. Students are expected to work independently unless instructed otherwise. Offering and accepting solutions from others is a serious offense. All suspected violations will be forwarded to the Honor Committee, and you may, at the instructor's discretion, receive an immediate zero on that assignment and fail the course regardless of any action taken by the Honor Committee.
+* If you feel sick, let me know and stay home. We will work on a temporary solution. 
+* Students must fully comply with all the provisions of the University’s Honor Code. Students are expected to work independently unless instructed otherwise. Offering and accepting solutions from others is a serious offense. All suspected violations will be forwarded to the Honor Committee, and you may, at the instructor's discretion, receive an immediate zero on that assignment and fail the course regardless of any action taken by the Honor Committee. When in doubt, ask the instructor.
     * All graded labs, quizzes, and project must be pledged. 
     * You can discuss labs and project, but you cannot share code.
     * Do not exchange information during online quizzes.

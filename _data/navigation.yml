@@ -1,12 +1,20 @@
 - name: Lectures
   link: /#
   dropdown:
-    - name: 1 - Coming Soon
+    - name: 1 - Introduction
       link: /lectures/lecture1/ 
+    - name: 2 - Robot Cyber and Physical
+      link: /lectures/lecture2/ 
+    - name: 3 - Unique Features 
+      link: /lectures/lecture3/ 
 - name: Labs
   link: /#
   dropdown:
-    - name: 1 - Coming Soon
+    - name: 1 - Set up and basic ROS
       link: /labs/lab1/
+    - name: 2 - ROS processes, communication, and simulation environment
+      link: /labs/lab2/
+    - name: 3 - Representing States, System Parameterization, and Services
+      link: /labs/lab3/
 - name: Project
   link: /project/project/
