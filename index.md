@@ -33,7 +33,7 @@ Developing software for robot systems is challenging as they must sense, actuate
 
 # Office Hours
 * Sebastian Elbaum: Wednesday 4:45PM - 6:00PM
-* Trey Woodlief:  Thursday 3:00PM - 5:00AM Rice 442
+* Trey Woodlief:  Thursday 3:00PM - 5:00PM Rice 442
 * Chris Morse:   Monday 9:00 - 11:00AM Rice 442
 
 # Prerequisites
