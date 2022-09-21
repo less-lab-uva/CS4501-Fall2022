@@ -20,5 +20,7 @@
       link: /labs/lab3/
     - name: 4 - Sensors, Visualization, Error Correction
       link: /labs/lab4/
+    - name: ⚠️Troubleshooting System Performance
+      link: /labs/troubleshooting/
 - name: Project
   link: /project/project/
