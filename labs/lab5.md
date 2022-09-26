@@ -819,7 +819,7 @@ More specifically, start by creating a list of classes `'dolphin', 'seal', 'peng
 
 Proceed to train your DNN and add it into the perception node.
 
-1. Take a screenshot of the training and testing results produced at the end of the training script.
+1. Take a screenshot of the training and testing results produced at the end of the training script. We require a testing accuracy of at least 60%.
 2. Showcase your drone flying to an animal and classifying it.
 3. Are there cases where your drone incorrectly classifies the animal? Why do you think this is?
 
@@ -847,7 +847,7 @@ Final Check:
     2. Showcase that your drone publishes that an animal is detected by echoing `/marine_life_detected`.
 
 4. Proceed to train your DNN and add it into the perception node.
-    1. Take a screenshot of the training and validation graph during the training process independent of ROS. We require a testing accuracy of at least 60%.
+    1. Take a screenshot of the training and testing results produced at the end of the training script. We require a testing accuracy of at least 60%.
     2. Showcase your drone flying to an animal and classifying it.
     3. Are there cases where your drone incorrectly classifies the animal? Why do you think this is?
 
