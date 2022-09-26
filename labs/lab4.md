@@ -300,8 +300,7 @@ class GPSAltitude:
         self.pub.publish(self.altitude)
 
 
-if __name__ ==
-   '__main__':
+if __name__ == '__main__':
     rospy.init_node('gps_altitude_node')
     try:
         GPSAltitude()
