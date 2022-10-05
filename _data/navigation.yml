@@ -24,6 +24,8 @@
       link: /labs/lab4/
     - name: 5 - Perception through Image Analysis
       link: /labs/lab5/ 
+    - name: E - Robotics and Ethics
+      link: /labs/labE/
     - name: ⚠️Troubleshooting System Performance
       link: /labs/troubleshooting/
 - name: Project
