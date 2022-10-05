@@ -160,9 +160,9 @@ You may want to do a dry run of your debate arguments  with your teammates or pr
 ##  Checkpoint 2
  
 1. The speakers’ statements clearly supported their position. (25%)
-2. The speakers’ statements appeared to be well researched and documented. (25%)
-3. Arguments were presented with clarity and appropriate volume.  (25%)
-4. Rebuttals were specific to opposing arguments and expressed with clarity.  (25%)
+2. Arguments were presented with clarity and appropriate volume.  (25%)
+3. Rebuttals were specific to opposing arguments and expressed with clarity.  (25%)
+4. Answers during Q&A were precise and thoughtful.  (25%)
 5. Winner as per moderator decision (+1 extra credit point)
 
  
