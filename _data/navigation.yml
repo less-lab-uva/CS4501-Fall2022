@@ -11,6 +11,8 @@
       link: /lectures/lecture4/ 
     - name: 5 - Perception
       link: /lectures/lecture5/ 
+    - name: E - Ethics Lab Intro
+      link: /lectures/EthicsLabIntro/
 - name: Labs
   link: /#
   dropdown:
