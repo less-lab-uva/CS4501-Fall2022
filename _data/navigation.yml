@@ -13,6 +13,8 @@
       link: /lectures/lecture5/ 
     - name: E - Ethics Lab Intro
       link: /lectures/EthicsLabIntro/
+    - name: 6 - Control
+      link: /lectures/EthicsLabIntro/
 - name: Labs
   link: /#
   dropdown:
