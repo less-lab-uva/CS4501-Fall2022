@@ -90,7 +90,7 @@ The topic `/ship/beacon1` provides a set of coarse *x, y* directed vectors of th
 The vectors treat the drone as the origin and the ship as the endpoint.
 However, the ship measures distance using different units than the drone, so the PIDs must be tuned to reflect that.
 
-The topic `/ship/beacon2` functions similarly, except it only publishes when the drone is nearby the ship and uses different units from the drone and from `beacon1` to give a greater precision. This needs to be taken into account when tuning the PIDs and integrating the two error terms provided by `/ship/beacon1` and `/ship/beacon2`.
+The topic `/ship/beacon2` functions similarly, except it only publishes when the drone is nearby the ship and uses different units from the drone and from `beacon1` to give a greater precision. This needs to be taken into account when tuning the PIDs and integrating the two error terms provided by `/ship/beacon1` and `/ship/beacon2`. You are welcome to use the two beacon values in any way you wish. You may consider using one or the other depending on the situation the drone is in, or fusing them into one error sensor. Be sure you can explain how and why you used them in the manner you did.
 
 The ship publishes its topics at a rate of 4Hz.
 
@@ -245,7 +245,7 @@ You do not need to turn anything in for this checkpoint, but before continuing, 
 
 As discussed above, the drone must be at a height of at least 9 meters for the beacons to function correctly.
 You will implement a PID controller for the z-velocity to ensure that the drone stays above the required height.
-To begin, impleme
+
 
 **NOTE**: because you have not yet implemented a PID for x and y directional control, your drone may float around the map as it is hovering; this is okay.
 
@@ -513,20 +513,18 @@ Given the previously defined test property (i.e. once the drone gains contact wi
 
 * **Scenario4**: The ship moves in a spiral (hint: it probably won't work well)
 
-Remember, for scenarios 2 and 3 you will need to create a `launch` file for each test scenario. You will also need to add the tests to the `CMakeList.txt` so that ROS compiles them.
+Remember, for scenarios 2 and on you will need to create a `launch` file for each test scenario. You will also need to add the tests to the `CMakeList.txt` so that ROS compiles them.
 
 **In order for your tests to be considered passing, you are required to use the same P, I, and D values for all of the tests and scenarios within a checkpoint.**
 
 --- 
 ## Checkpoint 3
 
-Showcase your tests working for the PID controller's P term.
+Showcase your tests working for the PID controller's P and D terms.
 
 1. Showcase your drone passing all developed tests (with the possible exception of the last one)
 
-2. Create a new publisher in `ship_following_controller` to publish a Vector3 on the topic `ship/estimated_position`, that estimates the ship's position. Using rqt_plot, show the x and y of the estimated ship position in `ship/estimated_position` alongside the x and y of the drone position in `uav/sensors/gps`. The idea is to plot where the drone is and plot where the error terms estimate the ship to be, to ensure that the drone's position converges on where it believes the ship to be.
-
-3. Plot the drone's x and y velocities using rqt_plot, and show that they are not oscillating heavily.
+3. Create a new publisher in `ship_following_controller` to publish a Vector3 on the topic `ship/estimated_position`, that estimates the ship's position. Using rqt_plot, show the x and y of the estimated ship position in `uav/sensors/gps` alongside the x and y of `uav/input/position_request`
 
 4. Does your spiral test case pass or fail? Why?
 
@@ -566,10 +564,10 @@ Final Check:
     2. What did you select as an acceptable error bound in the `hztest`?
     3. If you were to create `param_value_specific` tests what would you have created?
     
-3. Showcase your tests working for the PID controllers P term.
-    1. Showcase your drone passing all developed tests (with the possible exception of the last one)
-    2. Create a new publisher in `ship_following_controller` to publish a Vector3 on the topic `ship/estimated_position`, that estimates the ship's position. Using rqt_plot, show the x and y of the estimated ship position in `ship/estimated_position` alongside the x and y of the drone position in `uav/sensors/gps`.
-    3. Plot the drone's x and y velocities using rqt_plot, and show that they are not oscillating heavily.
+3. Showcase your tests working for the PID controllers P and D terms.
+    1. Showcase your drone passing all developed tests (except the last one)
+    2. If test 3 fails, why does it fail?
+    3. Create a new publisher in `ship_following_controller` to publish a Vector3 on the topic `ship/estimated_position`, that estimates the ship's position. Using rqt_plot, show the x and y of the estimated ship position in `uav/sensors/gps` alongside the x and y of `uav/input/position_request`.
     4. Does your spiral test case pass or fail? Why?
 
 4. Showcase your tests working for the PID controllers I term.
