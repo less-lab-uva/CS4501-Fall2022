@@ -478,6 +478,8 @@ We then declare a function `print_msg` that publishes the data passed to it on t
 Next comes the custom test `test_following`. 
 **Your task**: parts of this test have been removed, and you will need to implement them. As the test stands, it records the start time, and then loops for the `test_duration` specified as a parameter. During this time it listens to messages on the `/ship_followed` topic. You must modify this test such that once the ship has been detected on the `/ship_followed` topic, you assert that it never becomes undetected.
 
+**NOTE:** The `test_duration` must be at least long enough to demonstrate that your drone can reach the required altitude and then perform the scenario; for example, for the hovering scenario 30-45 seconds is likely sufficient depending on how long your drone takes to reach the required altitude. 
+
 Once you have updated the test, use the `rosttest` command to run it. It should eventually pass as shown below:
 
 ```
@@ -526,7 +528,7 @@ Showcase your tests working for the PID controller's P and D terms.
 
 2. Create a new publisher in `ship_following_controller` to publish a Vector3 on the topic `ship/estimated_position`, that estimates the ship's position. Using rqt_plot, show the x and y of the estimated ship position in `ship/estimated_position` alongside the x and y of the drone position in `uav/sensors/gps`. The idea is to plot where the drone is and plot where the error terms estimate the ship to be, to ensure that the drone's position converges on where it believes the ship to be.
 
-3. Plot the drone's x and y velocities using rqt_plot, and show that they are not oscillating heavily.
+3. Plot the drone's x and y velocities using rqt_plot. Are they oscillating? If so, why?
 
 4. Does your spiral test case pass or fail? Why?
 
@@ -569,7 +571,7 @@ Final Check:
 3. Showcase your tests working for the PID controllers P and D terms.
     1. Showcase your drone passing all developed tests (with the possible exception of the last one)
     2. Create a new publisher in `ship_following_controller` to publish a Vector3 on the topic `ship/estimated_position`, that estimates the ship's position. Using rqt_plot, show the x and y of the estimated ship position in `ship/estimated_position` alongside the x and y of the drone position in `uav/sensors/gps`.
-    3. Plot the drone's x and y velocities using rqt_plot, and show that they are not oscillating heavily.
+    3. Plot the drone's x and y velocities using rqt_plot. Are they oscillating? If so, why?
     4. Does your spiral test case pass or fail? Why?
 
 4. Showcase your tests working for the PID controllers I term.
