@@ -32,6 +32,10 @@
       link: /labs/lab5/ 
     - name: E - Robotics and Ethics
       link: /labs/labE/
+    - name: 6 - Controlling and Testing Robots
+      link: /labs/lab6/
+    - name: 7 - Mapping and Motion Planning
+      link: /labs/lab7/
     - name: ⚠️Troubleshooting System Performance
       link: /labs/troubleshooting/
 - name: Project
