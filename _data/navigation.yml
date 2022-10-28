@@ -15,6 +15,8 @@
       link: /lectures/EthicsLabIntro/
     - name: 6 - Control
       link: /lectures/lecture6/
+    - name: 7 - Motion Planning
+      link: /lectures/lecture6/
 - name: Labs
   link: /#
   dropdown:
