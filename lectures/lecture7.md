@@ -12,7 +12,7 @@ layout: page
 
 <figure class="image is-16by9">
     <iframe class="has-ratio" frameborder="0" scrolling="yes" width="640" height="360"
-        src="../Motion Planning II.pdf">
+        src="../Motion Planning I.pdf">
     </iframe>
 </figure>
 
