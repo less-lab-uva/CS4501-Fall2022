@@ -19,6 +19,8 @@
       link: /lectures/lecture7/
     - name: 8 - Transformations 
       link: /lectures/lecture8/
+    - name: 9 - Specifications and Safety
+      link: /lectures/lecture9/
 - name: Labs
   link: /#
   dropdown:
