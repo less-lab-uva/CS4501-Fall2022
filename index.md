@@ -55,9 +55,9 @@ Developing software for robot systems is challenging as they must sense, actuate
 |9     |Tradeoffs when Making Plans + Q3        | Lab-6: Controlling and Testing Tobots                                 |
 |10     |Localization and Navigation Stack       | Lab-7: Mapping and Motion Planning Software Stack                     |
 |11    |Overloading and Transformations         | Lab-8: Pose Transformations                                           |
-|12    |Advanced Robotics + Q4                  | Lab 9: Swarms and Safety                                              |
-|13    |Project parameters                      | Invited Speaker                                                       |
-|14    |Project check                           | Project consult                                                       |
+|12    |Specs, V&V, and Safety + Q4                  | Lab 9: Specifying Robots                                            |
+|13    |Robot Design - All together                      | Project Parameters                                                       |
+|14    |Project consult                          | --Thanksgiving--                                                  |
 |15    |Project Presentations and Demos         | Project Presentations and Demos                                       |
 |16    |Taking stock                            | ---                                                                   |
  
