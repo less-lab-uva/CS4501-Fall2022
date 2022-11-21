@@ -218,6 +218,7 @@ Opening the door is implemented as a service. This is because we need to know wh
 5. The square behind a door will always be open
 6. Doors will only appear at an odd manhattan distance from the goal.
 7. The dog will never move, and the transformation between the `cell_tower` and `world` will never change.
+8. For the purposes of LiDAR readings, you may assume that the roll, pitch, and yaw of the drone are 0.
 
 ## Example Seeds
 Here we provide the complete maps for several possible map configurations and seeds. These can be useful when debugging as they provided controlled environments where you know the expected output. Additionally, for any seed, the system will output an ASCII art drawing of the map to the terminal *after* ROS has shutdown.
