@@ -89,7 +89,7 @@ This node tracks the state of the world throughout the mission, simulates the LI
 
 If the drone has completed the mission without crashing, a success message is published containing the time taken to complete this run.
 
-Only the following topics may be used in order to complete the mission. You may not use any additional information.
+Only the following topics may be used to interface with the teaching staff code. You may not use any additional information. You are allowed to create any topics, etc. you need in the `simple_control` package to communicate between your code.
 
 | Topic                  | Text Description                                                    | Your task|
 |------------------------|---------------------------------------------------------------------|--------|
@@ -221,6 +221,7 @@ Opening the door is implemented as a service. This is because we need to know wh
 8. For the purposes of LiDAR readings, you may assume that the roll, pitch, and yaw of the drone are 0.
 9. Except for "intersections", all "hallways" will always be one wide; more concretely, there will never be a 2x2 block of open cells.
 10. The world may not be square, but each side will be no more than 31 cells in length.
+11. The outer boundary of the map will always be obstacles.
 
 ## Example Seeds
 Here we provide the complete maps for several possible map configurations and seeds. These can be useful when debugging as they provided controlled environments where you know the expected output. Additionally, for any seed, the system will output an ASCII art drawing of the map to the terminal *after* ROS has shutdown.
